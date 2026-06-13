@@ -4,7 +4,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 )
 
@@ -26,7 +25,6 @@ func addHandler(w http.ResponseWriter, r *http.Request) {
 
 func multiplyHandler(w http.ResponseWriter, r *http.Request) {
 	// Assume we receive a JSON payload like {"a": 5, "b": 4}
-	log.Print("chegooou !")
 	var data map[string]int
 	err := json.NewDecoder(r.Body).Decode(&data)
 	if err != nil {

@@ -3,7 +3,7 @@ package main
 import (
 	"bytes"
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"testing"
 
@@ -12,7 +12,7 @@ import (
 
 func TestIntegration(t *testing.T) {
 	Convey("Given two microservices for addition and multiplication", t, func() {
-		Convey("When adding 2 and 3, and multiplying the result by 4", func() {
+		Convey("When adding 2 and 3, and multiplying 2 by 3", func() {
 			addURL := "http://localhost:8080/add"
 			multiplyURL := "http://localhost:8080/multiply"
 
@@ -29,7 +29,7 @@ func TestIntegration(t *testing.T) {
 			So(addResp.StatusCode, ShouldEqual, http.StatusOK)
 
 			// Read the response body
-			addBody, err := ioutil.ReadAll(addResp.Body)
+			addBody, err := io.ReadAll(addResp.Body)
 			So(err, ShouldBeNil)
 
 			// Unmarshal the response JSON
@@ -48,7 +48,7 @@ func TestIntegration(t *testing.T) {
 			So(multiplyResp.StatusCode, ShouldEqual, http.StatusOK)
 
 			// Read the response body
-			multiplyBody, err := ioutil.ReadAll(multiplyResp.Body)
+			multiplyBody, err := io.ReadAll(multiplyResp.Body)
 			So(err, ShouldBeNil)
 
 			// Unmarshal the response JSON
